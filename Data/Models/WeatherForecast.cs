@@ -1,4 +1,4 @@
-namespace BlazorCRUD.Data;
+namespace BlazorCRUD.Data.Models;
 
 public class WeatherForecast
 {
