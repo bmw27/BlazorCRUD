@@ -1,16 +1,18 @@
 ﻿@page "/fetchdata"
 
-<PageTitle>Weather forecast</PageTitle>
-
+@using Microsoft.EntityFrameworkCore
+@using BlazorCRUD.Data.DbContexts
 @using BlazorCRUD.Data.Models
-@using BlazorCRUD.Data.Services
-@inject WeatherForecastService ForecastService
+@using BlazorCRUD.Services
+@inject IDbContextFactory<ApplicationDbContext> ContextFactory
+
+<PageTitle>Weather forecasts</PageTitle>
 
 <h1>Weather forecast</h1>
 
 <p>This component demonstrates fetching data from a service.</p>
 
-@if (forecasts == null)
+@if (!forecasts.Any())
 {
     <p><em>Loading...</em></p>
 }
@@ -40,10 +42,13 @@ else
 }
 
 @code {
-    private WeatherForecast[]? forecasts;
+    private List<WeatherForecast> forecasts = new List<WeatherForecast>();
 
     protected override async Task OnInitializedAsync()
     {
-        forecasts = await ForecastService.GetForecastAsync(DateTime.Now);
+        using (var ctx = ContextFactory.CreateDbContext())
+        {
+            forecasts = await ctx.WeatherForecasts.ToListAsync();
+        }
     }
 }

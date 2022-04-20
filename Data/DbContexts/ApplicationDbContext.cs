@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using BlazorCRUD.Data.Models;
 
 namespace BlazorCRUD.Data.DbContexts
 {
     public partial class ApplicationDbContext : DbContext
     {
+        public virtual DbSet<WeatherForecast> WeatherForecasts => Set<WeatherForecast>();
+
         public ApplicationDbContext()
         {
         }
@@ -18,10 +21,7 @@ namespace BlazorCRUD.Data.DbContexts
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (!optionsBuilder.IsConfigured)
-            {
-                optionsBuilder.UseSqlServer("Name=ConnectionStrings:DefaultConnection");
-            }
+            //
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
