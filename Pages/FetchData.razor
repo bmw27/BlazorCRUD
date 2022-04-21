@@ -4,7 +4,8 @@
 @using BlazorCRUD.Data.DbContexts
 @using BlazorCRUD.Data.Models
 @using BlazorCRUD.Services
-@inject IDbContextFactory<ApplicationDbContext> ContextFactory
+@inject IDbContextFactory<ApplicationDbContext> DbContextFactory
+@inject WeatherForecastService weatherForecastService
 
 <PageTitle>Weather forecasts</PageTitle>
 
@@ -46,9 +47,9 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        using (var ctx = ContextFactory.CreateDbContext())
+        using (var DbContext = DbContextFactory.CreateDbContext())
         {
-            forecasts = await ctx.WeatherForecasts.ToListAsync();
+            forecasts = await weatherForecastService.GetWeatherForecastsAsync(DbContext);
         }
     }
 }

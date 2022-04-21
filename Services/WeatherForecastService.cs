@@ -6,12 +6,11 @@ namespace BlazorCRUD.Services;
 
 public class WeatherForecastService
 {
-    private readonly ApplicationDbContext _context;
+    // public WeatherForecastService()
+    // { }
 
-    public WeatherForecastService(ApplicationDbContext context)
+    public async Task<List<WeatherForecast>> GetWeatherForecastsAsync(ApplicationDbContext DbContext)
     {
-        _context = context;
+        return await DbContext.WeatherForecasts.ToListAsync();
     }
-
-    public async Task<List<WeatherForecast>> GetWeatherForecastsAsync() => await _context.WeatherForecasts.ToListAsync();
 }
