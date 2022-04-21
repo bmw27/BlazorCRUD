@@ -9,17 +9,19 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
-builder.Services.AddSingleton<WeatherForecastService>();
+builder.Services.AddScoped<WeatherForecastService>();
 
 String connectionString = "Name=ConnectionStrings:DefaultConnection";
 
+#if DEBUG
+builder.Services.AddDbContextFactory<ApplicationDbContext>(
+    options => options.UseSqlServer(connectionString).EnableSensitiveDataLogging()
+);
+#else
 builder.Services.AddDbContextFactory<ApplicationDbContext>(
     options => options.UseSqlServer(connectionString)
 );
-
-builder.Services.AddDbContext<ApplicationDbContext>(
-    options => options.UseSqlServer(connectionString)
-);
+#endif
 
 var app = builder.Build();
 

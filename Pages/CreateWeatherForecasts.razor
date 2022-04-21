@@ -1,0 +1,20 @@
+﻿@page "/weather-forecast/create"
+
+@using BlazorCRUD.Data.Models
+@using BlazorCRUD.Services
+@inject WeatherForecastService ForecastService
+@inject NavigationManager NavigationManager
+
+<PageTitle>Add Weather forecast</PageTitle>
+
+<h1>Add Weather forecast</h1>
+
+@code {
+    private WeatherForecast forecast = new WeatherForecast();
+
+    private async Task CreateWeatherForecast()
+    {
+        await ForecastService.CreateWeatherForecastAsync(forecast);
+        NavigationManager.NavigateTo("/weather-forecast");
+    }
+}

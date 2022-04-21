@@ -1,17 +1,13 @@
-﻿@page "/fetchdata"
+﻿@page "/weather-forecast"
 
-@using Microsoft.EntityFrameworkCore
-@using BlazorCRUD.Data.DbContexts
 @using BlazorCRUD.Data.Models
 @using BlazorCRUD.Services
-@inject IDbContextFactory<ApplicationDbContext> DbContextFactory
-@inject WeatherForecastService weatherForecastService
+@inject WeatherForecastService ForecastService
+@inject NavigationManager NavigationManager
 
 <PageTitle>Weather forecasts</PageTitle>
 
 <h1>Weather forecast</h1>
-
-<p>This component demonstrates fetching data from a service.</p>
 
 @if (!forecasts.Any())
 {
@@ -28,6 +24,7 @@ else
             <th>Summary</th>
         </tr>
     </thead>
+
     <tbody>
         @foreach (var forecast in forecasts)
             {
@@ -40,6 +37,10 @@ else
             }
         </tbody>
     </table>
+
+    <div class="mt-2">
+        <NavLink href="weather-forecast/create" class="btn btn-primary">Add Forecast</NavLink>
+    </div>
 }
 
 @code {
@@ -47,9 +48,6 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        using (var DbContext = DbContextFactory.CreateDbContext())
-        {
-            forecasts = await weatherForecastService.GetWeatherForecastsAsync(DbContext);
-        }
+        forecasts = await ForecastService.GetWeatherForecastsAsync();
     }
 }
