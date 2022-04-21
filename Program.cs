@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.EntityFrameworkCore;
-using BlazorCRUD.Data.DbContexts;
+using BlazorCRUD.Data;
 using BlazorCRUD.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,11 +14,11 @@ builder.Services.AddScoped<WeatherForecastService>();
 String connectionString = "Name=ConnectionStrings:DefaultConnection";
 
 #if DEBUG
-builder.Services.AddDbContextFactory<ApplicationDbContext>(
+builder.Services.AddDbContextFactory<AppDbContext>(
     options => options.UseSqlServer(connectionString).EnableSensitiveDataLogging()
 );
 #else
-builder.Services.AddDbContextFactory<ApplicationDbContext>(
+builder.Services.AddDbContextFactory<AppDbContext>(
     options => options.UseSqlServer(connectionString)
 );
 #endif

@@ -1,14 +1,14 @@
 using Microsoft.EntityFrameworkCore;
-using BlazorCRUD.Data.DbContexts;
+using BlazorCRUD.Data;
 using BlazorCRUD.Data.Models;
 
 namespace BlazorCRUD.Services;
 
 public class WeatherForecastService
 {
-    private readonly IDbContextFactory<ApplicationDbContext> _contextFactory;
+    private readonly IDbContextFactory<AppDbContext> _contextFactory;
 
-    public WeatherForecastService(IDbContextFactory<ApplicationDbContext> ContextFactory)
+    public WeatherForecastService(IDbContextFactory<AppDbContext> ContextFactory)
     {
         _contextFactory = ContextFactory;
     }
