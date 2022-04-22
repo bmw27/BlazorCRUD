@@ -7,14 +7,14 @@
 
 <PageTitle>Add Weather forecast</PageTitle>
 
-<h1>Add Weather forecast</h1>
+<h1>Add Weather Forecast</h1>
 
 @code {
-    private WeatherForecast forecast = new WeatherForecast();
+    private WeatherForecast _forecast = new WeatherForecast();
 
     private async Task CreateWeatherForecast()
     {
-        await ForecastService.CreateWeatherForecastAsync(forecast);
+        await ForecastService.CreateWeatherForecastAsync(_forecast);
         NavigationManager.NavigateTo("/weather-forecast");
     }
 }

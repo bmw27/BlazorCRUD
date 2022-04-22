@@ -1,6 +1,6 @@
-using Microsoft.EntityFrameworkCore;
 using BlazorCRUD.Data;
 using BlazorCRUD.Data.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace BlazorCRUD.Services;
 

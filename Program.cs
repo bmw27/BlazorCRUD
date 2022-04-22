@@ -1,17 +1,17 @@
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
-using Microsoft.EntityFrameworkCore;
 using BlazorCRUD.Data;
 using BlazorCRUD.Services;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
+
+// Custom Services
 builder.Services.AddScoped<WeatherForecastService>();
 
-String connectionString = "Name=ConnectionStrings:DefaultConnection";
+var connectionString = "Name=ConnectionStrings:DefaultConnection";
 
 #if DEBUG
 builder.Services.AddDbContextFactory<AppDbContext>(
